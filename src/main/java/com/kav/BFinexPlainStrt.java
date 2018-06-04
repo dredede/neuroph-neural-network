@@ -13,9 +13,8 @@ public class BFinexPlainStrt {
         ClientConfig config = new DefaultClientConfig();
         Client client = Client.create(config);
         WebResource service = client.resource(UriBuilder.fromUri("https://api.bitfinex.com/v1/trades/BTCUSD").build());
-
         // getting   data
-        System.out.println(service.accept(MediaType.APPLICATION_JSON).get(String[].class));
+        System.out.println(service.accept(MediaType.APPLICATION_JSON).get(String.class));
 
     }
 }

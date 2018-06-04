@@ -2,7 +2,6 @@ package com.technobium;
 
 
 import java.text.SimpleDateFormat;
-import java.time.*;
 import java.util.Date;
 
 public class TradesBTCUSD {
@@ -54,12 +53,12 @@ public class TradesBTCUSD {
         this.type = type;
     }
 
-       int tid ;
-       Long timestamp ;
-       Double price ;
-       Double amount;
-       String exchange;
-       String type;
+    private int tid ;
+    private Long timestamp ;
+    private  Double price ;
+    private   Double amount;
+    private   String exchange;
+    private   String type;
 
     /*public TradesBTCUSD(int tid, String timestamp, Double price, Double amount, String exchange, String type) {
         this.tid = tid;
@@ -72,19 +71,12 @@ public class TradesBTCUSD {
 */
     @Override
     public String toString() {
-        ZoneId sourceZone = ZoneId.of("UTC");
-        ZoneId targetZone = ZoneId.of("CET");
+
         Date currentDate = new Date(timestamp*1000);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
         return  " price >" + price +  " amount >"+amount  +" time >"
                 + dateFormat.format(currentDate);
-               // +Instant.ofEpochMilli(timestamp).atOffset(ZoneOffset.of("Z")).withOffsetSameLocal(ZoneOffset.of("+2"));
 
-        /*
-                +ZonedDateTime.ofInstant(Instant.ofEpochMilli(timestamp), sourceZone)
-                .withZoneSameLocal(targetZone)
-                .toString();*/
-               // +timestamp;
     }
 }
 /*
