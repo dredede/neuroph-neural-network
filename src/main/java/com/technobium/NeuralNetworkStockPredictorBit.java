@@ -93,9 +93,9 @@ public class NeuralNetworkStockPredictorBit {
         }
     }
 
-    void prepareDataBit() throws Exception {
+   /* void prepareDataBit() throws Exception {
         List<Double> traidListNow = new Bitfinex().getListBitAmount();
-    }
+    }*/
     double normalizeValue(double input) {
         return (input - min) / (max - min) * 0.8 + 0.1;
     }

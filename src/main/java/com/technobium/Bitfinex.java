@@ -30,7 +30,7 @@ public class Bitfinex {
         }
           System.out.println(service.accept(MediaType.APPLICATION_JSON).get(TradesBTCUSD[].class));
     }
-
+/*
 public List <Double>  getListBitAmount(){
     int size =1000;
     Double [] amuntTradesBTCUSD;
@@ -48,6 +48,6 @@ public List <Double>  getListBitAmount(){
      }
     List <Double> listAmount = new Arrays.asList(amuntTradesBTCUSD);
     return listAmount;
-}
+}*/
 
 }
