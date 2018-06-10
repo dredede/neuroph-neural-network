@@ -74,7 +74,7 @@ public class TradesBTCUSD {
 
         Date currentDate = new Date(timestamp*1000);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
-        return  " price >" + price +  " amount >"+amount  +" time >"
+        return  " price >" +type+" "+ price +  " amount >"+amount  +" time >"
                 + dateFormat.format(currentDate);
 
     }
