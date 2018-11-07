@@ -1,14 +1,5 @@
 package com.technobium;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
@@ -18,6 +9,13 @@ import org.neuroph.core.learning.SupervisedLearning;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.BackPropagation;
 
+import java.io.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.technobium.Bitfinex;
+
 public class NeuralNetworkStockPredictorBit {
 
     private int slidingWindowSize;
@@ -26,11 +24,10 @@ public class NeuralNetworkStockPredictorBit {
     private String rawDataFilePath;//"input/rawTrainingData.csv"
 
     private String learningDataFilePath = "input/learningData.csv";
-    private String neuralNetworkModelFilePath = "stockPredictor.nnet";
+    private String neuralNetworkModelFilePath = "stockPredictorBit.nnet";
 
     public static void main(String[] args) throws IOException {
-
-        NeuralNetworkStockPredictorBit predictor =
+        /*NeuralNetworkStockPredictorBit predictor =
                 new NeuralNetworkStockPredictorBit(6, "input/rawTrainingData.csv");
         predictor.prepareData();
 
@@ -39,11 +36,33 @@ public class NeuralNetworkStockPredictorBit {
 
         System.out.println("Testing network");
         predictor.testNetwork();
+        */
+        NeuralNetworkStockPredictorBit predictor =
+                new NeuralNetworkStockPredictorBit(6);
+        Bitfinex dataapi = new Bitfinex();
+        List<Double> doubleListBitPrice = dataapi.getListBitPrice("buy");
+        predictor.max= Collections.max(doubleListBitPrice );
+        predictor.min= Collections.min(doubleListBitPrice );
+
+        System.out.println("Buy->Max->"+ Collections.max(doubleListBitPrice ));
+        System.out.println("Buy->Min->"+ Collections.min(doubleListBitPrice ));
+
+
+        System.out.printf("Norm->Min->%s%n", predictor.normalizeValue(
+                doubleListBitPrice.get(doubleListBitPrice.size()-1)));
+        System.out.printf("Norm->-1->"+
+                doubleListBitPrice.get(doubleListBitPrice.size()-1));
+
     }
 
     public NeuralNetworkStockPredictorBit(int slidingWindowSize, String rawDataFilePath) {
         this.rawDataFilePath = rawDataFilePath;
         this.slidingWindowSize = slidingWindowSize;
+
+    }
+    public NeuralNetworkStockPredictorBit(int slidingWindowSize ) {
+         this.slidingWindowSize = slidingWindowSize;
+
     }
 
     void prepareData() throws IOException {
@@ -105,7 +124,8 @@ public class NeuralNetworkStockPredictorBit {
     }
 
     void trainNetwork() throws IOException {
-        NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(slidingWindowSize,
+        NeuralNetwork<BackPropagation> neuralNetwork;
+        neuralNetwork = new MultiLayerPerceptron(slidingWindowSize,
                 2 * slidingWindowSize + 1, 1);
 
         int maxIterations = 1000;
