@@ -1,12 +1,4 @@
 package com.technobium;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.LinkedList;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
@@ -15,6 +7,9 @@ import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.core.learning.SupervisedLearning;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.BackPropagation;
+
+import java.io.*;
+import java.util.LinkedList;
 
 public class NeuralNetworkStockPredictor {
 
